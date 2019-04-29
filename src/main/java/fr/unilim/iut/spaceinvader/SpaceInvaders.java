@@ -1,6 +1,8 @@
 package fr.unilim.iut.spaceinvader;
-  
-	public class SpaceInvaders {
+
+import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
+
+public class SpaceInvaders {
 
 		private static final char MARQUE_FIN_LIGNE = '\n';
 		private static final char MARQUE_VIDE = '.';
@@ -20,7 +22,7 @@ package fr.unilim.iut.spaceinvader;
 			return recupererEspaceJeuDansChaineASCII();
 		}
 
-		private String recupererEspaceJeuDansChaineASCII() {
+		public String recupererEspaceJeuDansChaineASCII() {
 			StringBuilder espaceDeJeu = new StringBuilder();
 			for (int y = 0; y < hauteur; y++) {
 				for (int x = 0; x < longueur; x++) {
@@ -50,6 +52,9 @@ package fr.unilim.iut.spaceinvader;
 		}
 
 	    public void positionnerUnNouveauVaisseau(int x, int y) {
-	        this.vaisseau = new Vaisseau(x, y);
+	    	if (x >= longueur)
+	    		throw new HorsEspaceJeuException("Vous êtes en dehors de l'espace jeu");
+	    	
+	    	vaisseau = new Vaisseau(x, y);
 		}
    }
